@@ -53,6 +53,42 @@ nav {
     margin-bottom: 10px;
 }
 
+.card-header {
+    background-color: orange;
+    color: white;
+    border-radius: 5px 5px 0 0;
+    padding: 0.75rem 1.25rem;
+  }
+/*Bill Css part*/
+  .submit-guess {
+    background-color: orange;
+    color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0.5rem 1rem;
+    border: 2px solid orange;
+    cursor: pointer;
+  }
+
+  .guess-input {
+    border: 2px solid orange;
+    border-right: none;
+    padding: 0.5rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .remaining-guesses {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .card-body img {
+    border-radius: 5px 5px 0 0;
+    max-height: auto; /* Adjust as needed */
+  }
+
 @media (min-width: 598px) {
     #hamburger {
         display: none;

@@ -1,0 +1,42 @@
+.leaderboard {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.headings {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.heading {
+    text-align: left;
+    font-weight: bold;
+}
+
+.song-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.album-art {
+    width: 50px;
+    height: auto;
+}
+
+.hints-container {
+    background-color: white;
+    border: 2px solid #000;
+    border-radius: 20px;
+    font-size: 1.5rem;
+}
+
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+}
+/* Add additional CSS for styling as necessary */

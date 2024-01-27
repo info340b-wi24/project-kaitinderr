@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Kai Tinder, Cam Bun, Bill Park">
+  <meta name="description"
+    content="Ranking of the top 50 K-Pop songs. Includes a game feature where users guess the song, as well as a recommendation feature where users can link one song to another.">
+  <link rel="icon" type="image/x-icon" href="img/mango-icon.png">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <title>Mango Music</title>
+
+</head>
+
+<body>
+  <header>
+    <nav class="nav-bar">
+      <a href="#" class="icon"><img src="img/mango-icon.png" alt="mango icon"></a>
+      <div id="hamburger"><a href="#"><i class="fa fa-bars" aria-label="menu"></i></a></div>
+      <div id="links">
+        <ul class="nav-options">
+          <li class="nav-page"><a href="#">Home</a></li>
+          <li class="nav-page"><a href="#">Game</a></li>
+          <li class="nav-page"><a href="#">Sign in</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="container my-5">
+      <!-- Row for the guessing game -->
+      <div class="row">
+
+        <!-- Question mark card -->
+        <div class="col-md-6">
+          <div class="card text-center">
+            <div class="card-body">
+              <img src="../project-kaitinderr/img/question_mark.jpeg" alt="What's the song?" class="img-fluid">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h2>Clues</h2>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">1. This song was released in <span id="release-year">[Year]</span>.</li>
+              <li class="list-group-item">2. The duration of the song is <span
+                  id="song-duration">[minutes:seconds]</span>.</li>
+              <li class="list-group-item">3. Its current rating is <span id="current-rating">[Rating]</span> stars.</li>
+              <li class="list-group-item">4. The singer of this song is <span id="singer-name">[Artist Name]</span>.
+              </li>
+              <li class="list-group-item">5. The song is included in the <span id="album-name">[Album Name]</span>
+                album.</li>
+            </ul>
+          </div>
+          <!-- Guess input form inside the clues column -->
+          <div class="input-group mt-5 mb-3">
+            <input type="text" class="guess-input" placeholder="Enter your guess" class="form-control">
+            <button class="submit-guess" class="btn btn-primary">Submit Guess</button>
+          </div>
+          <div class="remaining-guesses">Remaining Guesses: <span class="guesses-left">5</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+
+  <footer>
+    <p>&copy; 2024 Mango Music</p>
+  </footer>
+
+</body>
+
+</html>
