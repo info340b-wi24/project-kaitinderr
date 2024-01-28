@@ -88,6 +88,10 @@ nav {
     border-radius: 5px 5px 0 0;
     max-height: auto; /* Adjust as needed */
   }
+  
+  .input-group.justify-content-center {
+    justify-content: center;
+  }
 
 @media (min-width: 598px) {
     #hamburger {
