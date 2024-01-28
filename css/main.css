@@ -37,6 +37,10 @@ nav {
     font-size: 2.5em;
 }
 
+.album-cover {
+  height: 300px;
+}
+
 #hamburger > a {
     color: white;
     font-size: 2.5rem;
