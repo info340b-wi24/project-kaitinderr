@@ -130,7 +130,7 @@ nav {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-image: url(img/shut-down.jpg);
+    background-image: url(../img/shut-down.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -149,11 +149,31 @@ nav {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.15);
 }
+.headercontainer_dumblitty::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+.headercontainer_wonderland::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+}
 
 .headercontainer_wonderland {
     display: block;
     text-align: center;
-    background-image: url(img/wonderland.jpg);
+    background-image: url(../img/wonderland.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -166,7 +186,7 @@ nav {
 .headercontainer_dumblitty {
     display: block;
     text-align: center;
-    background-image: url(img/dumblitty.jpg);
+    background-image: url(../img/dumblitty.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
