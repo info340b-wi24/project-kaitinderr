@@ -179,7 +179,9 @@ nav {
 .album_img {
     border-radius: 10px;
 }
-
+.info_label{
+    margin: 0;
+}
 .ranks {
     display: flex;
     padding: 10px;
