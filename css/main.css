@@ -327,5 +327,11 @@ textarea {
     .lyrics {
         width: 100%;
     }
+    .recommendation_text_area {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 7;
+        max-height: 13em;
+    }
 }
 
