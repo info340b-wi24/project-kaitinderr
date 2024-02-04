@@ -37,6 +37,10 @@ nav {
     font-size: 2.5em;
 }
 
+.card {
+    background-color: rgb(243, 244, 245);
+}
+
 .ranking-card {
     position: relative;
     overflow: hidden;
@@ -55,6 +59,7 @@ nav {
     inset: 0;
     background: rgba(255, 255, 255, 0.4);
     font-size: 1.5rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
