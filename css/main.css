@@ -37,9 +37,47 @@ nav {
     font-size: 2.5em;
 }
 
+.ranking-card {
+    position: relative;
+    overflow: hidden;
+}
+
 .album-cover {
-  aspect-ratio: 1/1;
-  border-radius: 10px;
+    display: block;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+.ranking-card-content {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.4);
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    
+/* Some hover styling sourced from: Web Dev Simplified on YouTube */
+.ranking-card:hover .album-cover.blur {
+    filter: blur(5px);
+}
+
+.ranking-card .ranking-card-content.fade {
+    opacity: 0;
+}
+
+.ranking-card:hover .ranking-card-content.fade {
+    opacity: 1;
+}   
+
+@media (hover: hover) {
+    .album-cover, .ranking-card-content {
+        transition: 200ms ease-in-out;
+    } 
 }
 
 #hamburger > a {
