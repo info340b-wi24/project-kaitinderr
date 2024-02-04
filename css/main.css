@@ -38,7 +38,8 @@ nav {
 }
 
 .album-cover {
-  height: 300px;
+  aspect-ratio: 1/1;
+  border-radius: 10px;
 }
 
 #hamburger > a {
@@ -88,10 +89,10 @@ nav {
     color: #333;
   }
 
-  .card-body img {
+  /* .card-body img {
     border-radius: 5px 5px 0 0;
-    max-height: auto; /* Adjust as needed */
-  }
+    max-height: auto; 
+  } */
   
   .input-group.justify-content-center {
     justify-content: center;
