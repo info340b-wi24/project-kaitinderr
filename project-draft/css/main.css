@@ -41,10 +41,10 @@ nav {
     background-color: rgb(243, 244, 245);
 }
 
-.ranking-card {
+/* .ranking-card {
     position: relative;
     overflow: hidden;
-}
+} */
 
 .album-cover {
     display: block;
@@ -55,34 +55,14 @@ nav {
 }
 
 .ranking-card-content {
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.4);
-    font-size: 1.5rem;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-    
-/* Some hover styling sourced from: Web Dev Simplified on YouTube */
-.ranking-card:hover .album-cover.blur {
-    filter: blur(5px);
+    justify-content: start;
+    align-items: flex-start;
 }
 
-.ranking-card .ranking-card-content.fade {
-    opacity: 0;
-}
-
-.ranking-card:hover .ranking-card-content.fade {
-    opacity: 1;
-}   
-
-@media (hover: hover) {
-    .album-cover, .ranking-card-content {
-        transition: 200ms ease-in-out;
-    } 
+.category {
+    font-weight: bold;
 }
 
 #hamburger > a {
