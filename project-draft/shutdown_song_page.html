@@ -31,46 +31,50 @@
             </div>
         </nav>
     </header>
-    <div class="headercontainer_shutdown">
-        <h1 class="song_title">Shut Down</h1>
+    <div class="banner">
+        <img src="img/Blackpink_Banner.jpg" alt="Blackpink Banner" />
     </div>
     <main>
-        <div class="main_container">
-            <div class="tablet_container">
-                <section>
-                    <div class="album">
-                        <img class="album_img" src="img/Born_Pink_Digital.jpeg"
-                            alt="Blackpink Born Pink album cover image">
-                        <div class="ranks">
-                            <p class="rank_text">Rank: 1</p>
-                            <p class="rank_text"> | </p>
-                            <p class="rank_text">Score: 5</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 py-2">
+                    <section>
+                        <div class="card">
+                            <img src="img/Born_Pink_Digital.jpeg" class="card-img-top album_img"
+                                alt="Blackpink Born Pink album cover image">
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="ranks d-flex">
+                                            <p class="rank_text mr-2">Rank: 1</p>
+                                            <p class="rank_text mr-2">|</p>
+                                            <p class="rank_text">Score: 5</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <p class="info_label">Artist(s):</p>
+                                    <p>Blackpink</p>
+                                    <p class="info_label">Album:</p>
+                                    <p>Born Pink</p>
+                                    <p class="info_label">Release date:</p>
+                                    <p>September 16, 2022</p>
+                                    <p class="info_label">Length:</p>
+                                    <p>2 minutes 56 seconds</p>
+                                    <p class="info_label">Songwriter(s):</p>
+                                    <p>Teddy, Danny Chung, Vince, 24</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class=info>
-
-                            <p class=info_label>Artist(s):</p>
-                            <p>Blackpink</p>
-
-
-                            <p class=info_label>Album:</p>
-                            <p>Born Pink</p>
-
-                            <p class=info_label>Release date:
-                            <p>September 16, 2022</p>
-
-                            <p class=info_label>Length:</p>
-                            <p>2 minutes 56 seconds</p>
-
-                            <p class=info_label>Songwriter(s):</p>
-                            <p>Teddy, Danny Chung, Vince, 24</p>
-
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div class="lyrics">
-                        <h2 class="lyrics_header">Lyrics</h2>
-                        <p>BLACKPINK in your area, eh-oh</p>
+                    </section>
+                </div>
+                <div class="col-md-8 py-2">
+                    <section>
+                        <div class="card">
+                            <div class="card-body d-flex flex-column">
+                                <h1 class="song_title">Shut Down</h1>
+                                <h2 class="lyrics_header">Lyrics</h2>
+                                <p>BLACKPINK in your area, eh-oh</p>
                         <p>BLACKPINK in your area, eh-oh</p>
                         <p>컴백이 아냐, 떠난 적 없으니까</p>
                         <p>고개들이 돌아, 진정해, 목 꺾일라</p>
@@ -122,54 +126,65 @@
                         <p>Shut it down (eh-oh), whoa, whoa, whoa, whoa</p>
                         <p>Shut it down (eh-oh), BLACKPINK in your area</p>
                         <p>Keep talkin', we shut you down</p>
-                    </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4 py-2 px-lg-4">
+                <section>
+                    <div class="recommendations">
+                        <h3 class="recommendations_title">Recommendations</h3>
+                        <div class="py-2">
+                            <div class="card">
+                                <a href="wonderland_song_page.html">
+                                    <img class="album_img_recommendations" src="img/Treasure_EP_Final.png"
+                                        alt="Ateez Treasure Episode Final album cover image">
+                                </a>
+                                <div class="recommendation_text_area">
+                                    <p> User1: If you love the cool vibes in Blackpink's Shutdown you
+                                        should really try listening to Ateezs' Wonderland! It has the same really cool vibes for
+                                        a boy band.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <div class="card">
+                                <a href="dumb_litty_song_page.html">
+                                    <img class="album_img_recommendations" src="img/Dumb_Litty.jpg"
+                                        alt="KARD Dumb Litty album cover image">
+                                </a>
+                                <div class="recommendation_text_area">
+                                    <p> User2: Kard's Dumb Litty has similar vibes if you want to try a
+                                        co-ed Kpop group.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recommendation_form">
+                            <h4>Enter your recommendation:</h4>
+                            <div>
+                                <button class="button" type="button" aria-label="Choose a Song"><i
+                                        class="fa-solid fa-plus"></i> Choose a song</button>
+                            </div>
+                            <form class="form" action="#" method="post">
+                                <label for="recommendation"></label>
+                                <textarea id="recommendation" name="recommendation" required
+                                    placeholder="Type your recommendation here..."></textarea>
+                            </form>
+                            <div>
+                                <input class="button" type="submit" value="Submit" aria-label="Submit Recommendation">
+                            </div>
+                        </div>
                 </section>
             </div>
-            <section>
-                <div class="recommendations">
-                    <h3 class="recommendations_title">Recommendations</h3>
-                    <div class="recommendation_card">
-                        <a href="wonderland_song_page.html">
-                            <img class="album_img_recommendations" src="img/Ateez_Treasure_EP_Final.png"
-                                alt="Ateez Treasure Episode Final album cover image">
-                        </a>
-                        <div class="recommendation_text_area">
-                            <p> User1: If you love the cool vibes in Blackpink's Shutdown you
-                                should really try listening to Ateezs' Wonderland! It has the same really cool vibes for
-                                a boy band.</p>
-                        </div>
-                    </div>
-                    <div class="recommendation_card">
-                        <a href="dumb_litty_song_page.html">
-                            <img class="album_img_recommendations" src="img/KARD_Dumb_Litty.jpg"
-                                alt="KARD Dumb Litty album cover image">
-                        </a>
-                        <div class="recommendation_text_area">
-                            <p> User2: Kard's Dumb Litty has similar vibes if you want to try a
-                                co-ed Kpop group.</p>
-                        </div>
-                    </div>
-
-                    <div class="recommendation_form">
-                        <h4>Enter your recommendation:</h4>
-                        <div>
-                            <button class="button" type="button" aria-label="Choose a Song"><i
-                                    class="fa-solid fa-plus"></i> Choose a song</button>
-                        </div>
-                        <form class="form" action="#" method="post">
-                            <label for="recommendation"></label>
-                            <textarea id="recommendation" name="recommendation" required
-                                placeholder="Type your recommendation here..."></textarea>
-                        </form>
-                        <div>
-                            <input class="button" type="submit" value="Submit" aria-label="Submit Recommendation">
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
-    <footer>
-        <p>&copy; 2024 Mango Music</p>
+    <footer class="mt-auto">
+        <div class="container">
+            <p>&copy; 2024 Mango Music</p>
+        </div>
     </footer>
 </body>
+
+</html>
