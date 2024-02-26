@@ -63,7 +63,7 @@ function KpopGame() {
       )}
       {reveal && (
         <>
-          <img src={`${process.env.PUBLIC_URL}/${SONG_DATA[currentSongIndex].albumCover}`} alt={SONG_DATA[currentSongIndex].artist} />
+          <img src={SONG_DATA[currentSongIndex].albumCover} alt={SONG_DATA[currentSongIndex].artist} />
           <p>Song Title: {SONG_DATA[currentSongIndex].songName}</p>
           <p>Album Name: {SONG_DATA[currentSongIndex].albumName}</p>
         </>
