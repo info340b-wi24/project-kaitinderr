@@ -11,6 +11,7 @@ function KpopGame() {
   const [hintIndex, setHintIndex] = useState(0); // To show hints progressively
   const [userGuess, setUserGuess] = useState('');
   const [reveal, setReveal] = useState(false); // Reveal the answer
+  const [correctGuess, setCorrectGuess] = useState(false);
 
   const hints = [
     `The artist of the song is "${SONG_DATA[currentSongIndex].artist}"`,
@@ -20,13 +21,12 @@ function KpopGame() {
     `The songwriters are "${SONG_DATA[currentSongIndex].songWriters}"`,
   ];
   
-  const resetGame = (correctGuess = false) => {
-    setReveal(false); // Hide the answer
-    setHintIndex(0); // Reset hint counter
-    if (correctGuess) {
-      // Move to next song only if the guess was correct
-      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % SONG_DATA.length);
-    }
+  const resetGame = () => {
+    setCurrentSongIndex(getRandomIndex(SONG_DATA));
+    setReveal(false);
+    setHintIndex(0);
+    setUserGuess('');
+    setCorrectGuess(false);
   };
   
   const handleGuess = (e) => {
@@ -35,48 +35,39 @@ function KpopGame() {
 
   const checkGuess = () => {
     if (userGuess.toLowerCase() === SONG_DATA[currentSongIndex].songName.toLowerCase()) {
-      alert('Correct!.');
-      resetGame();
+      setCorrectGuess(true); // Indicate the guess was correct
+      setReveal(true); // Reveal the answer immediately
     } else {
       if (hintIndex >= 4) {
-        alert('Incorrect, you used all your chances.');
         setReveal(true);
       } else {
-        alert(`Incorrect. Try again.You have ${4 - hintIndex} hints remaining.`);
         setHintIndex(hintIndex + 1);
       }
     }
-    setUserGuess('');
+    setUserGuess(''); // Clear input field
   };
-
 
   return (
     <div className="container my-5">
       <h2>Guess the K-Pop Song</h2>
       {!reveal && (
         <>
-          {hints.slice(0, hintIndex + 1).map((hint, index) => (
-            <p key={index}>{hint}</p>
-          ))}
-          <p>Hints remaining: {5 - hintIndex}</p>
+          {hints.slice(0, hintIndex + 1).map((hint, index) => <p key={index}>{hint}</p>)}
+          <input type="text" value={userGuess} onChange={handleGuess} />
+          <button onClick={checkGuess}>Guess</button>
         </>
       )}
       {reveal && (
         <>
-          <img src={SONG_DATA[currentSongIndex].albumCover} alt={SONG_DATA[currentSongIndex].artist} />
+          <img src={process.env.PUBLIC_URL + '/' + SONG_DATA[currentSongIndex].albumCover} alt={SONG_DATA[currentSongIndex].artist} />
           <p>Song Title: {SONG_DATA[currentSongIndex].songName}</p>
           <p>Album Name: {SONG_DATA[currentSongIndex].albumName}</p>
+          <button onClick={resetGame}>New Game</button>
+          {correctGuess && <div className="feedback-message">Correct!</div>}
         </>
-      )}
-      <input type="text" value={userGuess} onChange={handleGuess} disabled={reveal} />
-      {!reveal ? (
-        <button onClick={checkGuess}>Guess</button>
-      ) : (
-        <button onClick={resetGame}>New Game</button>
       )}
     </div>
   );
 }
-
 
 export default KpopGame;
