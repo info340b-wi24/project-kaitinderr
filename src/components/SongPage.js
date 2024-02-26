@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SongPage({ song }) {
+function SongPage(props) {
 
     return (
         <body>
@@ -18,7 +18,7 @@ function SongPage({ song }) {
                 </nav>
             </header>
             <div className="banner">
-                <img src={song.backroundBanner} alt={song.artist} />
+                <img src={props.song.backgroundBanner} alt={props.song.artist} />
             </div>
             <main>
                 <div className="container">
@@ -26,29 +26,29 @@ function SongPage({ song }) {
                         <div className="col-md-4 py-2">
                             <section>
                                 <div className="card">
-                                    <img src={song.albumCover} classNameName="card-img-top album_img"
-                                        alt={song.albumName} />
+                                    <img src={props.song.albumCover} className="card-img-top album_img"
+                                        alt={props.song.albumName} />
                                     <div className="card-body">
                                         <div className="row mb-3">
                                             <div className="col">
                                                 <div className="ranks d-flex">
-                                                    <p className="rank_text mr-2">Rank: {song.rank}</p>
+                                                    <p className="rank_text mr-2">Rank: {props.song.rank}</p>
                                                     <p className="rank_text mr-2">|</p>
-                                                    <p className="rank_text">Score: {song.totalScore}</p>
+                                                    <p className="rank_text">Score: {(props.song.totalScore / props.song.numRankings).toFixed(2)}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="info">
                                             <p className="info_label">Artist(s):</p>
-                                            <p>{song.artist}</p>
+                                            <p>{props.song.artist}</p>
                                             <p className="info_label">Album:</p>
-                                            <p>{song.albumName}</p>
+                                            <p>{props.song.albumName}</p>
                                             <p className="info_label">Release date:</p>
-                                            <p>{song.releaseDate}</p>
+                                            <p>{props.song.releaseDate}</p>
                                             <p className="info_label">Length:</p>
-                                            <p>{song.length}</p>
+                                            <p>{props.song.length}</p>
                                             <p className="info_label">Songwriter(s):</p>
-                                            <p>{song.songWriters}</p>
+                                            <p>{props.song.songWriters}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -58,9 +58,9 @@ function SongPage({ song }) {
                             <section>
                                 <div className="card">
                                     <div className="card-body d-flex flex-column">
-                                        <h1 className="song_title">{song.songName}</h1>
+                                        <h1 className="song_title">{props.song.songName}</h1>
                                         <h2 className="lyrics_header">Lyrics</h2>
-                                        <p>{song.lyrics}</p>
+                                        <p>{props.song.lyrics}</p>
                                     </div>
                                 </div>
                             </section>
