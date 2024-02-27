@@ -1,23 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Recommendation from './Recommendation';
 
 function SongPage(props) {
 
     return (
         <body>
-            <header>
-                <nav className="nav-bar">
-                    <a href="index.html" className="icon"><img src="img/mango-icon.png" alt="mango icon" /></a>
-                    <div id="hamburger"><a href="#"><i className="fa fa-bars" aria-label="menu"></i></a></div>
-                    <div id="links">
-                        <ul className="nav-options">
-                            <li className="nav-page"><a href="index.html">Home</a></li>
-                            <li className="nav-page"><a href="game.html">Game</a></li>
-                            <li className="nav-page"><a href="#">Sign in</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
             <div className="banner">
                 <img src={props.song.backgroundBanner} alt={props.song.artist} />
             </div>
@@ -70,11 +57,6 @@ function SongPage(props) {
                    <Recommendation song={props.song}/>
                 </div>
             </main>
-            <footer className="mt-auto">
-                <div className="container">
-                    <p>&copy; 2024 Mango Music</p>
-                </div>
-            </footer>
         </body>
 
     )
