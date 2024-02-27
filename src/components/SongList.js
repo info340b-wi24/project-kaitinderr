@@ -7,8 +7,7 @@ function SongCard(props) {
             <div className="card mb-2 border-0">
                 <div className="card-body ranking-card">
                     <div className="col-sm">
-                        <h3 className="card-title mb-2"><a href="#"
-                            className="text-decoration-none text-reset">{props.song.songName}</a></h3>
+                        <h3 className="card-title mb-2"><a href="#" className="text-decoration-none text-reset">{props.song.songName}</a></h3>
                         <div className="row">
                             <div className="col-sm-6">
                                 <img src={props.song.albumCover} className="card-img album-cover mb-3" alt={props.song.songName} />
@@ -46,14 +45,12 @@ function SongCard(props) {
 export default function SongList(props) {
     const [searchQuery, setSearchQuery] = useState('');
 
-    // Event handler for handling changes in the search input
     const handleSearchInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
 
-    // Event handler for handling form submission (hitting enter)
     const handleSubmit = (event) => {
-        event.preventDefault(); // Prevents the default form submission behavior
+        event.preventDefault();
     };
 
     const sortedSongs = props.songs.map(song => ({
@@ -69,29 +66,21 @@ export default function SongList(props) {
 
     // Function to filter the song cards based on search query
     const filteredSongCards = sortedSongCards.filter(songCard => {
-        // You can customize this logic based on how you want to filter
         return songCard.key.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     return (
         <main className="mx-auto text-center">
             <div className="container">
-                <div className="col"> {/* Add appropriate Bootstrap classes */}
+                <div className="col">
                     <h1>K-Pop Song Rankings</h1>
                     <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            placeholder="Search Song..."
-                            className="search"
-                            value={searchQuery}
-                            onChange={handleSearchInputChange}
-                        />
+                        <input type="text" placeholder="Search Song..." className="search" value={searchQuery} onChange={handleSearchInputChange} />
                     </form>
                     <div className="row">
                         {filteredSongCards}
                     </div>
                 </div>
-
             </div>
         </main>
     )

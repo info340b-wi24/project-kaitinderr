@@ -14,8 +14,7 @@ function SongPage(props) {
                         <div className="col-md-4 py-2">
                             <section>
                                 <div className="card">
-                                    <img src={props.song.albumCover} className="card-img-top album_img"
-                                        alt={props.song.albumName} />
+                                    <img src={props.song.albumCover} className="card-img-top album_img" alt={props.song.albumName} />
                                     <div className="card-body">
                                         <div className="row mb-3">
                                             <div className="col">
