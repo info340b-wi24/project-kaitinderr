@@ -65,13 +65,13 @@ nav {
     font-weight: bold;
 }
 
-#hamburger > a {
+.hamburger-menu > a {
     color: white;
     font-size: 2.5rem;
     margin-right: .5em;
 }
 
-#links {
+.nav-links {
     display: none;
     margin-top: 5px;
 }
@@ -206,11 +206,11 @@ textarea {
     margin-bottom: 5px;
 }
 @media (min-width: 598px) {
-    #hamburger {
+    .hamburger-menu {
         display: none;
     }
     
-    #links {
+    .nav-links {
         display: block;
     }
 }
