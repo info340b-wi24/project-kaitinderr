@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import SONG_DATA from '../data/songs.json';
-// Assuming your song data is imported or fetched here
 
 function getRandomIndex(data) {
     return Math.floor(Math.random() * data.length);
 }
 
-function KpopGame() {
-  const [currentSongIndex, setCurrentSongIndex] = useState(getRandomIndex(SONG_DATA)); // To cycle through songs for the game
+function KpopGame(props) {
+  const [currentSongIndex, setCurrentSongIndex] = useState(getRandomIndex(props.songs)); // To cycle through songs for the game
   const [hintIndex, setHintIndex] = useState(0); // To show hints progressively
   const [userGuess, setUserGuess] = useState('');
   const [reveal, setReveal] = useState(false); // Reveal the answer
   const [correctGuess, setCorrectGuess] = useState(false);
 
   const hints = [
-    `The artist of the song is "${SONG_DATA[currentSongIndex].artist}"`,
-    `The album name of this song is "${SONG_DATA[currentSongIndex].albumName}"`,
-    `The length (duration) of the song is "${SONG_DATA[currentSongIndex].length}"`,
-    `The song was released on "${SONG_DATA[currentSongIndex].releaseDate}"`,
-    `The songwriters are "${SONG_DATA[currentSongIndex].songWriters}"`,
+    `The artist of the song is "${props.songs[currentSongIndex].artist}"`,
+    `The album name of this song is "${props.songs[currentSongIndex].albumName}"`,
+    `The length (duration) of the song is "${props.songs[currentSongIndex].length}"`,
+    `The song was released on "${props.songs[currentSongIndex].releaseDate}"`,
+    `The songwriters are "${props.songs[currentSongIndex].songWriters}"`,
   ];
   
   const resetGame = () => {
-    setCurrentSongIndex(getRandomIndex(SONG_DATA));
+    setCurrentSongIndex(getRandomIndex(props.songs));
     setReveal(false);
     setHintIndex(0);
     setUserGuess('');
@@ -34,7 +32,7 @@ function KpopGame() {
   };
 
   const checkGuess = () => {
-    if (userGuess.toLowerCase() === SONG_DATA[currentSongIndex].songName.toLowerCase()) {
+    if (userGuess.toLowerCase() === props.songs[currentSongIndex].songName.toLowerCase()) {
       setCorrectGuess(true); // Indicate the guess was correct
       setReveal(true); // Reveal the answer immediately
     } else {
@@ -59,9 +57,9 @@ function KpopGame() {
       )}
       {reveal && (
         <>
-          <img src={process.env.PUBLIC_URL + '/' + SONG_DATA[currentSongIndex].albumCover} alt={SONG_DATA[currentSongIndex].artist} />
-          <p>Song Title: {SONG_DATA[currentSongIndex].songName}</p>
-          <p>Album Name: {SONG_DATA[currentSongIndex].albumName}</p>
+          <img src={props.songs[currentSongIndex].albumCover} alt={props.songs[currentSongIndex].songName} />
+          <p>Song Title: {props.songs[currentSongIndex].songName}</p>
+          <p>Album Name: {props.songs[currentSongIndex].albumName}</p>
           <button onClick={resetGame}>New Game</button>
           {correctGuess && <div className="feedback-message">Correct!</div>}
         </>
