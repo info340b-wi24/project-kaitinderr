@@ -12,7 +12,7 @@ function SongCard(props) {
                         <div className="row">
                             <div className="col-sm-6">
                                 <img src={props.song.albumCover} className="card-img album-cover mb-3" alt={props.song.songName} />
-                                <select className="mb-3">
+                                <select className="mb-3 mx-1">
                                     <option value="">Select Score</option>
                                     <option value="5">5</option>
                                     <option value="4">4</option>
@@ -20,7 +20,7 @@ function SongCard(props) {
                                     <option value="2">2</option>
                                     <option value="1">1</option>
                                 </select>
-                                <button type="submit" className="">Submit</button>
+                                <button type="submit" className="score-button">Submit</button>
                             </div>
                             <div className="col-sm-6">
                                 <div className="ranking-card-content">
@@ -44,6 +44,18 @@ function SongCard(props) {
 }
 
 export default function SongList(props) {
+    const [searchQuery, setSearchQuery] = useState('');
+
+    // Event handler for handling changes in the search input
+    const handleSearchInputChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    // Event handler for handling form submission (hitting enter)
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevents the default form submission behavior
+    };
+
     const sortedSongs = props.songs.map(song => ({
         ...song,
         score: song.totalScore / song.numRankings
@@ -52,17 +64,34 @@ export default function SongList(props) {
     let counter = 0;
     const sortedSongCards = sortedSongs.map(song => {
         counter++;
-        return <SongCard song={song} key={song.songName} position={counter}/>
+        return <SongCard song={song} key={song.songName} position={counter} />
     })
 
+    // Function to filter the song cards based on search query
+    const filteredSongCards = sortedSongCards.filter(songCard => {
+        // You can customize this logic based on how you want to filter
+        return songCard.key.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
     return (
-        <main class="mx-auto text-center">
-            <h1>K-Pop Song Rankings</h1>
-            <input type="text" placeholder="Search..." class="search" />
-            <div class="container">
-                <div class="row">
-                    {sortedSongCards}
+        <main className="mx-auto text-center">
+            <div className="container">
+                <div className="col"> {/* Add appropriate Bootstrap classes */}
+                    <h1>K-Pop Song Rankings</h1>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            placeholder="Search Song..."
+                            className="search"
+                            value={searchQuery}
+                            onChange={handleSearchInputChange}
+                        />
+                    </form>
+                    <div className="row">
+                        {filteredSongCards}
+                    </div>
                 </div>
+
             </div>
         </main>
     )

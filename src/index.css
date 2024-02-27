@@ -37,7 +37,7 @@ nav {
     font-size: 2.5em;
 }
 
-.card {
+.card-body {
     background-color: rgb(243, 244, 245);
 }
 
@@ -87,6 +87,23 @@ nav {
     border-radius: 5px 5px 0 0;
     padding: 0.75rem 1.25rem;
   }
+
+  /* this button css is sourced from  */
+.score-button {
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+    background: #FFF;
+    border: 1px solid #D5D9D9;
+    font-size: 13px;
+    height: 31px;
+    padding: 0 11px;
+    text-align: center;
+    font-weight: 400;
+    color: #0F1111;
+}
 /*Bill Css part*/
   .submit-guess {
     background-color: orange;
@@ -111,11 +128,6 @@ nav {
     font-size: 1rem;
     color: #333;
   }
-
-  /* .card-body img {
-    border-radius: 5px 5px 0 0;
-    max-height: auto; 
-  } */
   
   .input-group.justify-content-center {
     justify-content: center;

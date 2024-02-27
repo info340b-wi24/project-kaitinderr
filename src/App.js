@@ -7,8 +7,8 @@ function App(props) {
   return (
     <div className="App">
       {/* <KpopGame /> */}
-      <SongPage song={props.songData[0]} />
-      {/* <SongList songs={props.songData} /> */}
+      {/* <SongPage song={props.songData[0]} /> */}
+      <SongList songs={props.songData} />
     </div>
   );
 }
