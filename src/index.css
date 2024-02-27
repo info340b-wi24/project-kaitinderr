@@ -190,6 +190,9 @@ textarea {
 .info_label {
     font-weight: bold;
 }
+.select_song {
+    margin-bottom: 5px;
+}
 @media (min-width: 598px) {
     #hamburger {
         display: none;

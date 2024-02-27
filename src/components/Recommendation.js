@@ -55,7 +55,7 @@ function Recommendation() {
                 <h4>Enter your recommendation:</h4>
                 <form onSubmit={handleSubmit} className="form">
                     {}
-                    <select value={selectedSongName} onChange={handleSongChange}>
+                    <select className="select_song" value={selectedSongName} onChange={handleSongChange}>
                         <option value="">Select a Song</option>
                         {song.map(song => (
                             <option key={song.songName} value={song.songName}>{song.songName}</option>
