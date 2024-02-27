@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Recommendation from './Recommendation';
 
 function SongPage(props) {
 
@@ -66,54 +67,7 @@ function SongPage(props) {
                             </section>
                         </div>
                     </div>
-                    <div className="col-md-12 col-lg-4 py-2 px-lg-4">
-                        <section>
-                            <div className="recommendations">
-                                <h3 className="recommendations_title">Recommendations</h3>
-                                <div className="py-2">
-                                    <div className="card">
-                                        <a href="wonderland_song_page.html">
-                                            <img className="album_img_recommendations" src="img/Treasure_EP_Final.png"
-                                                alt="Ateez Treasure Episode Final album cover image" />
-                                        </a>
-                                        <div className="recommendation_text_area">
-                                            <p> User1: If you love the cool vibes in Blackpink's Shutdown you
-                                                should really try listening to Ateezs' Wonderland! It has the same really cool vibes for
-                                                a boy band.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="py-2">
-                                    <div className="card">
-                                        <a href="dumb_litty_song_page.html">
-                                            <img className="album_img_recommendations" src="img/Dumb_Litty.jpg"
-                                                alt="KARD Dumb Litty album cover image" />
-                                        </a>
-                                        <div className="recommendation_text_area">
-                                            <p> User2: Kard's Dumb Litty has similar vibes if you want to try a
-                                                co-ed Kpop group.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="recommendation_form">
-                                    <h4>Enter your recommendation:</h4>
-                                    <div>
-                                        <button className="button" type="button" aria-label="Choose a Song"><i
-                                            className="fa-solid fa-plus"></i> Choose a song</button>
-                                    </div>
-                                    <form className="form" action="#" method="post">
-                                        <label for="recommendation"></label>
-                                        <textarea id="recommendation" name="recommendation" required
-                                            placeholder="Type your recommendation here..."></textarea>
-                                    </form>
-                                    <div>
-                                        <input className="button" type="submit" value="Submit" aria-label="Submit Recommendation" />
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                   <Recommendation song={props.song}/>
                 </div>
             </main>
             <footer className="mt-auto">
