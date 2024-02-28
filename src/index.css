@@ -171,7 +171,7 @@ nav {
     max-height: 8em;
 }
 
-textarea {
+.recommendation_text_area {
     height: 100px;
     width: 100%;
 }

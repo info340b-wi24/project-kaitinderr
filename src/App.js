@@ -10,8 +10,8 @@ function App(props) {
     <div className="App">
       <NavBar />
       {/* <KpopGame songs={props.songData} /> */}
-      {/* <SongPage song={props.songData[2]} /> */}
-      <SongList songs={props.songData} />
+      <SongPage song={props.songData[2]} />
+      {/* <SongList songs={props.songData} /> */}
       <Footer />
     </div>
   );

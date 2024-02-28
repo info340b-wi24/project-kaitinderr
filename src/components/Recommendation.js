@@ -65,6 +65,7 @@ function Recommendation() {
                     </select>
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <textarea
+                        className="recommendation_text_area"
                         id="recommendation"
                         name="recommendation"
                         required
