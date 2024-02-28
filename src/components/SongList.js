@@ -11,7 +11,7 @@ function SongCard(props) {
                         <div className="row">
                             <div className="col-sm-6">
                                 <img src={props.song.albumCover} className="card-img album-cover mb-3" alt={props.song.songName} />
-                                <select className="mb-3 mx-1">
+                                <select className="mb-3 mx-1" aria-label='select score'>
                                     <option value="">Select Score</option>
                                     <option value="5">5</option>
                                     <option value="4">4</option>
