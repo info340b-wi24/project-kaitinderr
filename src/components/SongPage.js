@@ -47,7 +47,7 @@ function SongPage(props) {
                                     <div className="card-body d-flex flex-column">
                                         <h1 className="song_title">{props.song.songName}</h1>
                                         <h2 className="lyrics_header">Lyrics</h2>
-                                        <p>{props.song.lyrics}</p>
+                                        <p className="lyrics">{props.song.lyrics}</p>
                                     </div>
                                 </div>
                             </section>
