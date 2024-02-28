@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-  }
+}
 
 body {
     background-color: rgb(243, 244, 245);
@@ -10,7 +10,7 @@ nav {
     background-color: rgb(24, 24, 24);
 }
 
-.icon img{
+.icon img {
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -32,7 +32,8 @@ nav {
     margin-right: 20px;
 }
 
-.logo, .nav-page a {
+.logo,
+.nav-page a {
     color: white;
     font-size: 2.5em;
 }
@@ -65,7 +66,7 @@ nav {
     font-weight: bold;
 }
 
-.hamburger-menu > a {
+.hamburger-menu>a {
     color: white;
     font-size: 2.5rem;
     margin-right: .5em;
@@ -86,9 +87,9 @@ nav {
     color: white;
     border-radius: 5px 5px 0 0;
     padding: 0.75rem 1.25rem;
-  }
+}
 
-  /* this button css is sourced from  */
+/* this button css is sourced from copy-paste-css.com*/
 .score-button {
     display: inline-block;
     outline: 0;
@@ -113,7 +114,7 @@ nav {
     padding: 0.5rem 1rem;
     border: 2px solid black;
     cursor: pointer;
-  }
+}
 
   .guess-input {
     border: 2px solid black;
@@ -121,17 +122,18 @@ nav {
     padding: 0.5rem;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-  }
-  .remaining-guesses {
+}
+
+.remaining-guesses {
     text-align: center;
     margin-top: 1rem;
     font-size: 1rem;
     color: #333;
-  }
-  
-  .input-group.justify-content-center {
+}
+
+.input-group.justify-content-center {
     justify-content: center;
-  }
+}
 
 .card {
     border: 1px solid grey;
@@ -179,6 +181,7 @@ textarea {
     color: white;
     padding: 5px;
 }
+
 .banner {
     height: 200px;
 }
@@ -202,18 +205,21 @@ textarea {
 .info_label {
     font-weight: bold;
 }
+
 .select_song {
     margin-bottom: 5px;
 }
+
 @media (min-width: 598px) {
     .hamburger-menu {
         display: none;
     }
-    
+
     .nav-links {
         display: block;
     }
 }
+
 @media (min-width: 992px) {
     .container {
         display: flex;
@@ -229,9 +235,9 @@ textarea {
     .song_title {
         font-size: 3rem;
     }
+
     .album_img_recommendations {
         min-width: 100%;
         object-fit: cover;
     }
 }
-
