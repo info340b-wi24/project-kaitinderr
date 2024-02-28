@@ -7,7 +7,7 @@ function SongCard(props) {
             <div className="card mb-2 border-0">
                 <div className="card-body ranking-card">
                     <div className="col-sm">
-                        <h3 className="card-title mb-2"><a href="#" className="text-decoration-none text-reset">{props.song.songName}</a></h3>
+                        <h2 className="card-title mb-2"><a href="#" className="text-decoration-none text-reset">{props.song.songName}</a></h2>
                         <div className="row">
                             <div className="col-sm-6">
                                 <img src={props.song.albumCover} className="card-img album-cover mb-3" alt={props.song.songName} />
