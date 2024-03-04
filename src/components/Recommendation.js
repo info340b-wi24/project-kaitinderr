@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import song from '../data/songs.json';
+import songData from '../data/songs.json';
 
 function Recommendation() {
     const [selectedSongName, setSelectedSongName] = useState('');
@@ -18,7 +18,7 @@ function Recommendation() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const selectedSong = song.find(song => song.songName === selectedSongName);
+        const selectedSong = songData.find(song => song.songName === selectedSongName);
         if (selectedSong) {
             const recommendationText = `[${selectedSong.songName}] ${newRecommendation}`;
             setRecommendations([
@@ -35,31 +35,35 @@ function Recommendation() {
         }
     };
 
+    const songOptions = songData.map(song => (
+        <option key={song.songName} value={song.songName}>{song.songName}</option>
+    ));
+
+    const recommendationList = recommendations.map((recommendation, index) => (
+        <div key={index} className="py-2">
+            <div className="card">
+                <div className="recommendation_content">
+                    <img className="album_img_recommendations" src={recommendation.cover} alt={recommendation.album} />
+                    <p className="recommendation_text_area">{recommendation.text}</p>
+                </div>
+            </div>
+        </div>
+    ));
+
     return (
         <div className="col-md-12 col-lg-4 py-2 px-lg-4">
             <div className="recommendations">
                 <h3 className="recommendations_title">Recommendations</h3>
-                {recommendations.map((recommendation, index) => (
-                    <div key={index} className="py-2">
-                        <div className="card">
-                            <div className="recommendation-content">
-                                <img className="album_img_recommendations" src={recommendation.cover} alt={recommendation.album} />
-                                <p className="recommendation_text_area">{recommendation.text}</p>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                {recommendationList}
             </div>
             <div className="recommendation_form">
                 <h4>Enter your recommendation:</h4>
                 <form onSubmit={handleSubmit} className="form">
-                    <label for="select_song">Select a Song:
-                    <select className="select_song" value={selectedSongName} onChange={handleSongChange}>
-                        <option value=""></option>
-                        {song.map(song => (
-                            <option key={song.songName} value={song.songName}>{song.songName}</option>
-                        ))}
-                    </select>
+                    <label htmlFor="select_song">Select a Song:
+                        <select className="select_song" value={selectedSongName} onChange={handleSongChange}>
+                            <option value=""></option>
+                            {songOptions}
+                        </select>
                     </label>
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <textarea

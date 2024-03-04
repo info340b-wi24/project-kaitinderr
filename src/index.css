@@ -156,8 +156,8 @@ nav {
 }
 
 .album_img_recommendations {
-    min-width: 100%;
-    object-fit: cover;
+    width: 100%;
+    max-width: 150px;
 }
 
 .recommendation_text_area {
@@ -168,12 +168,19 @@ nav {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 5;
-    max-height: 8em;
+    line-height: 1em;
+    max-height: 5.5em;
 }
 
 .recommendation_text_area {
     height: 100px;
     width: 100%;
+}
+
+.recommendation_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button {
@@ -237,7 +244,7 @@ nav {
     }
 
     .album_img_recommendations {
-        min-width: 100%;
-        object-fit: cover;
+        width: 100%;
+        max-width: 150px;
     }
 }
