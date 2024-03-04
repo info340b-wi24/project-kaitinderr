@@ -37,7 +37,6 @@ function Recommendation() {
 
     return (
         <div className="col-md-12 col-lg-4 py-2 px-lg-4">
-            { }
             <div className="recommendations">
                 <h3 className="recommendations_title">Recommendations</h3>
                 {recommendations.map((recommendation, index) => (
@@ -51,12 +50,9 @@ function Recommendation() {
                     </div>
                 ))}
             </div>
-
-            { }
             <div className="recommendation_form">
                 <h4>Enter your recommendation:</h4>
                 <form onSubmit={handleSubmit} className="form">
-                    { }
                     <label for="select_song">Select a Song:
                     <select className="select_song" value={selectedSongName} onChange={handleSongChange}>
                         <option value=""></option>
@@ -75,7 +71,6 @@ function Recommendation() {
                         value={newRecommendation}
                         onChange={handleInputChange}
                     ></textarea>
-
                     <input className="button" type="submit" value="Submit" aria-label="Submit Recommendation" />
                 </form>
             </div>
