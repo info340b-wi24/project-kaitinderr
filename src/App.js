@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import KpopGame from './components/KpopGame.js'; // Adjust the path as necessary
 import SongList from './components/SongList.js';
 import SongPage from './components/SongPage.js';
@@ -9,9 +10,11 @@ function App(props) {
   return (
     <div className="App">
       <NavBar />
-      {/* <KpopGame songs={props.songData} /> */}
-      <SongPage song={props.songData[2]} />
-      {/* <SongList songs={props.songData} /> */}
+      <Routes>
+          <Route path="/" element={<SongList songs={props.songData} />} />
+          <Route path="/GamePage" element={<KpopGame songs={props.songData} />} />
+        </Routes>
+      {/* <SongPage song={props.songData[2]} /> */}
       <Footer />
     </div>
   );
