@@ -28,6 +28,12 @@ function KpopGame(props) {
     setCorrectGuess(false);
   };
 
+  const renderHints = () => {
+    return hints.slice(0, hintIndex + 1).map((hint, index) => (
+      <li key={index} className="list-group-item">{hint}</li>
+    ));
+  };
+
   const handleGuess = (e) => {
     setUserGuess(e.target.value);
   };
@@ -70,9 +76,7 @@ function KpopGame(props) {
                 <h2>Clues</h2>
               </div>
               <ul className="list-group list-group-flush">
-                {hints.slice(0, hintIndex + 1).map((hint, index) => (
-                  <li key={index} className="list-group-item">{hint}</li>
-                ))}
+                {renderHints()}
                 {reveal && !correctGuess && (
                   <li className="list-group-item list-group-item-danger">The correct answer was: "{props.songs[currentSongIndex].songName}" by {props.songs[currentSongIndex].artist}</li>
                 )}
