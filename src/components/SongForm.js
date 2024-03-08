@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 function SongForm({ showModal, handleClose }) {
     const [alertMessage, setAlertMessage] = useState(null);
+    const [formValid, setFormValid] = useState(false);
     const [songData, setSongData] = useState({
         songName: '',
         albumName: '',
@@ -21,10 +22,16 @@ function SongForm({ showModal, handleClose }) {
         const name = event.target.name;
         const value = event.target.value;
         setSongData({ ...songData, [name]: value });
+        setFormValid(event.target.form.checkValidity());
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!formValid) {
+            setAlertMessage('Please fill in all required fields.');
+            return;
+        }
 
         const db = getDatabase();
         const songsRef = ref(db, 'songs');
@@ -62,7 +69,7 @@ function SongForm({ showModal, handleClose }) {
                             <input type="text" className="form-control" name="artist" value={songData.artist} onChange={handleChange} placeholder="Artist(s)" required />
                         </div>
                         <div className="form-group">
-                            <input type="text" className="form-control" name="writers" value={songData.writers} onChange={handleChange} placeholder="Song Writers" />
+                            <input type="text" className="form-control" name="writers" value={songData.writers} onChange={handleChange} placeholder="Song Writers" required/>
                         </div>
                         <div className="form-group">
                             <textarea className="form-control" name="lyrics" value={songData.lyrics} onChange={handleChange} placeholder="Lyrics"></textarea>
@@ -76,11 +83,11 @@ function SongForm({ showModal, handleClose }) {
                         </div>
                         <div className="form-group">
                             <p>Song Cover:</p>
-                            <input type="file" className="form-control-file" name="picture" onChange={handleChange} />
+                            <input type="file" className="form-control-file" name="picture" onChange={handleChange} required/>
                         </div>
                         <div className="form-group">
                             <p>Background Banner:</p>
-                            <input type="file" className="form-control-file" name="banner" onChange={handleChange} />
+                            <input type="file" className="form-control-file" name="banner" onChange={handleChange} required/>
                         </div>
                     </form>
                 </Modal.Body>
