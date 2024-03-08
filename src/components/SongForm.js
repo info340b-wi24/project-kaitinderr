@@ -59,33 +59,33 @@ function SongForm({ showModal, handleClose }) {
                         <p>{alertMessage}</p>
                     }
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
+                        <div className="form-group py-2">
                             <input type="text" className="form-control" name="name" value={songData.name} onChange={handleChange} placeholder="Song Name" required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group py-2" >
                             <input type="text" className="form-control" name="album" value={songData.album} onChange={handleChange} placeholder="Album" required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group py-2">
                             <input type="text" className="form-control" name="artist" value={songData.artist} onChange={handleChange} placeholder="Artist(s)" required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group py-2">
                             <input type="text" className="form-control" name="writers" value={songData.writers} onChange={handleChange} placeholder="Song Writers" required/>
                         </div>
-                        <div className="form-group">
+                        <div className="form-group py-2">
                             <textarea className="form-control" name="lyrics" value={songData.lyrics} onChange={handleChange} placeholder="Lyrics"></textarea>
                         </div>
-                        <div className="form-group">
+                        <div className="form-group py-2">
                             <input type="text" className="form-control" name="length" value={songData.length} onChange={handleChange} placeholder="Length (e.g., 2:34)" required />
                         </div>
                         <div className="form-group">
                             <p>Release Date:</p>
                             <input type="date" className="form-control" name="releaseDate" value={songData.releaseDate} onChange={handleChange} required />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group py-2">
                             <p>Song Cover:</p>
                             <input type="file" className="form-control-file" name="picture" onChange={handleChange} required/>
                         </div>
-                        <div className="form-group">
+                        <div className="form-group py-2">
                             <p>Background Banner:</p>
                             <input type="file" className="form-control-file" name="banner" onChange={handleChange} required/>
                         </div>
