@@ -5,6 +5,7 @@ import App from './App';
 import './index.css';
 
 import SONG_DATA from './data/songs.json';
+import USER_DATA from './data/users.json';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -29,7 +30,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <App songData={SONG_DATA}/>
+    <App songData={SONG_DATA} userData={USER_DATA}/>
     </BrowserRouter>
   </React.StrictMode>
 );
