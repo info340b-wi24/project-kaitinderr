@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SongForm from './SongForm.js';
 
 function SongCard(props) {
 
@@ -19,7 +20,7 @@ function SongCard(props) {
                                     <option value="2">2</option>
                                     <option value="1">1</option>
                                 </select>
-                                <button type="submit" className="score-button">Submit</button>
+                                <button type="submit" className="rank-button">Submit</button>
                             </div>
                             <div className="col-sm-6">
                                 <div className="ranking-card-content">
@@ -44,6 +45,15 @@ function SongCard(props) {
 
 export default function SongList(props) {
     const [searchQuery, setSearchQuery] = useState('');
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
 
     const handleSearchInputChange = (event) => {
         setSearchQuery(event.target.value);
@@ -74,6 +84,10 @@ export default function SongList(props) {
             <div className="container">
                 <div className="col">
                     <h1>K-Pop Song Rankings</h1>
+                    <div className='my-3'>
+                        <button className="rank-button" onClick={openModal}>Add a Song</button>
+                    </div>
+                    <SongForm showModal={showModal} handleClose={closeModal} />
                     <form onSubmit={handleSubmit}>
                         <input type="text" placeholder="Search Song..." className="search" value={searchQuery} onChange={handleSearchInputChange} />
                     </form>
