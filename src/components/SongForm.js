@@ -68,13 +68,19 @@ function SongForm({ showModal, handleClose }) {
                             <textarea className="form-control" name="lyrics" value={songData.lyrics} onChange={handleChange} placeholder="Lyrics"></textarea>
                         </div>
                         <div className="form-group">
-                            <input type="date" className="form-control" name="releaseDate" value={songData.releaseDate} onChange={handleChange} required />
-                        </div>
-                        <div className="form-group">
                             <input type="text" className="form-control" name="length" value={songData.length} onChange={handleChange} placeholder="Length (e.g., 2:34)" required />
                         </div>
                         <div className="form-group">
+                            <p>Release Date:</p>
+                            <input type="date" className="form-control" name="releaseDate" value={songData.releaseDate} onChange={handleChange} required />
+                        </div>
+                        <div className="form-group">
+                            <p>Song Cover:</p>
                             <input type="file" className="form-control-file" name="picture" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <p>Background Banner:</p>
+                            <input type="file" className="form-control-file" name="banner" onChange={handleChange} />
                         </div>
                     </form>
                 </Modal.Body>
