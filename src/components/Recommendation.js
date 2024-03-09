@@ -1,11 +1,32 @@
-import React, { useState } from 'react';
-import songData from '../data/songs.json';
+import React, { useState, useEffect } from 'react';
+import { getDatabase, ref, onValue } from 'firebase/database';
 
 function Recommendation() {
     const [selectedSongName, setSelectedSongName] = useState('');
+    const [songs, setSongs] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
     const [newRecommendation, setNewRecommendation] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        const db = getDatabase();
+        const songsRef = ref(db, 'songs');
+        const offFunction = onValue(songsRef, (snapshot) => {
+            const songsVal = snapshot.val();
+            const loadedSongs = [];
+            for (let key in songsVal) {
+                loadedSongs.push({
+                    ...songsVal[key],
+                    key: key
+                });
+            }
+            setSongs(loadedSongs);
+        }, {
+            onlyOnce: true
+        });
+
+        return () => offFunction();
+    }, []);
 
     const handleSongChange = (event) => {
         setSelectedSongName(event.target.value);
@@ -18,15 +39,15 @@ function Recommendation() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const selectedSong = songData.find(song => song.songName === selectedSongName);
+        const selectedSong = songs.find(song => song.songName === selectedSongName);
         if (selectedSong) {
             const recommendationText = `[${selectedSong.songName}] ${newRecommendation}`;
-            setRecommendations([
-                ...recommendations,
+            setRecommendations(prevRecommendations => [
+                ...prevRecommendations,
                 {
                     text: recommendationText,
                     album: selectedSong.albumName,
-                    cover: selectedSong.albumCover
+                    cover: selectedSong.albumCoverURL
                 }
             ]);
             setNewRecommendation('');
@@ -35,8 +56,8 @@ function Recommendation() {
         }
     };
 
-    const songOptions = songData.map(song => (
-        <option key={song.songName} value={song.songName}>{song.songName}</option>
+    const songOptions = songs.map(song => (
+        <option key={song.key} value={song.songName}>{song.songName}</option>
     ));
 
     const recommendationList = recommendations.map((recommendation, index) => (

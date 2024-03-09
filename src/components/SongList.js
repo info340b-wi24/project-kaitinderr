@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SongForm from './SongForm.js';
+import { Link } from 'react-router-dom';
 import { getDatabase, ref, onValue, set as firebaseSet } from 'firebase/database';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -37,7 +38,11 @@ function SongCard(props) {
             <div className="card mb-2 border-0">
                 <div className="card-body ranking-card">
                     <div className="col-sm">
-                        <h2 className="card-title mb-2"><a href="#" className="text-decoration-none text-reset">{props.song.songName}</a></h2>
+                        <h2 className="card-title mb-2">
+                            <Link to={`/songs/${props.songKey}`} className="text-decoration-none text-reset">
+                                {props.song.songName}
+                            </Link>
+                        </h2>
                         <div className="row">
                             <div className="col-sm-6">
                                 <img src={props.song.albumCoverURL} className="card-img album-cover mb-3" alt={props.song.songName} />
