@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { getDatabase, ref, push as firebasePush } from 'firebase/database';
+import { getDatabase, ref as dbRef, push as firebasePush } from 'firebase/database';
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL} from 'firebase/storage';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function SongForm({ showModal, handleClose }) {
     const [alertMessage, setAlertMessage] = useState(null);
     const [formValid, setFormValid] = useState(false);
+    const [albumCoverFile, setAlbumCoverFile] = useState(undefined);
+    const [bannerFile, setBannerFile] = useState(undefined);
     const [songData, setSongData] = useState({
         songName: '',
         albumName: '',
@@ -14,18 +17,32 @@ function SongForm({ showModal, handleClose }) {
         lyrics: '',
         releaseDate: '',
         length: '',
-        albumCover: null, // WIP
-        backgroundBanner: null, // WIP
+        albumCoverURL: '', // WIP
+        backgroundBannerURL: '', // WIP
     });
 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        setSongData({ ...songData, [name]: value });
+
+        if (event.target.files && event.target.files.length > 0) {
+            if (name === 'albumCover') {
+                const imageFile = event.target.files[0];
+                setAlbumCoverFile(imageFile);
+            } else if (name === 'backgroundBanner') {
+                const imageFile = event.target.files[0];
+                setBannerFile(imageFile);
+            }
+        }
+
+        if (name !== 'albumCover' && name !== 'backgroundBanner') {
+            setSongData({ ...songData, [name]: value });
+        }
+
         setFormValid(event.target.form.checkValidity());
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (!formValid) {
@@ -33,8 +50,26 @@ function SongForm({ showModal, handleClose }) {
             return;
         }
 
+        // image stuff
+        const storage = getStorage();
+        const albumCoverRef = storageRef(storage, "albumCover/"+songData.songName+songData.artist);
+        const bannerRef = storageRef(storage, "backgroundBanner/"+songData.artist+songData.songName);
+
+        await uploadBytes(albumCoverRef, albumCoverFile);
+        await uploadBytes(bannerRef, bannerFile);
+        const albumCoverUrlString = await getDownloadURL(albumCoverRef);
+        const bannerUrlString = await getDownloadURL(bannerRef);
+        setSongData({
+            ...songData,
+            albumCoverURL: albumCoverUrlString,
+            backgroundBannerURL: bannerUrlString
+        });
+        console.log(songData);
+        console.log(albumCoverUrlString);
+        console.log(bannerUrlString);
+
         const db = getDatabase();
-        const songsRef = ref(db, 'songs');
+        const songsRef = dbRef(db, 'songs');
         firebasePush(songsRef, songData).then(() => {
             setAlertMessage('Song added successfully!');
             setTimeout(() => {
@@ -60,16 +95,16 @@ function SongForm({ showModal, handleClose }) {
                     }
                     <form onSubmit={handleSubmit}>
                         <div className="form-group py-2">
-                            <input type="text" className="form-control" name="name" value={songData.name} onChange={handleChange} placeholder="Song Name" required />
+                            <input type="text" className="form-control" name="songName" value={songData.songName} onChange={handleChange} placeholder="Song Name" required />
                         </div>
                         <div className="form-group py-2" >
-                            <input type="text" className="form-control" name="album" value={songData.album} onChange={handleChange} placeholder="Album" required />
+                            <input type="text" className="form-control" name="albumName" value={songData.albumName} onChange={handleChange} placeholder="Album" required />
                         </div>
                         <div className="form-group py-2">
                             <input type="text" className="form-control" name="artist" value={songData.artist} onChange={handleChange} placeholder="Artist(s)" required />
                         </div>
                         <div className="form-group py-2">
-                            <input type="text" className="form-control" name="writers" value={songData.writers} onChange={handleChange} placeholder="Song Writers" required/>
+                            <input type="text" className="form-control" name="songWriters" value={songData.songWriters} onChange={handleChange} placeholder="Song Writers" required/>
                         </div>
                         <div className="form-group py-2">
                             <textarea className="form-control" name="lyrics" value={songData.lyrics} onChange={handleChange} placeholder="Lyrics"></textarea>
@@ -83,11 +118,11 @@ function SongForm({ showModal, handleClose }) {
                         </div>
                         <div className="form-group py-2">
                             <p>Song Cover:</p>
-                            <input type="file" className="form-control-file" name="picture" onChange={handleChange} required/>
+                            <input type="file" className="form-control-file" name="albumCover" onChange={handleChange} required/>
                         </div>
                         <div className="form-group py-2">
                             <p>Background Banner:</p>
-                            <input type="file" className="form-control-file" name="banner" onChange={handleChange} required/>
+                            <input type="file" className="form-control-file" name="backgroundBanner" onChange={handleChange} required/>
                         </div>
                     </form>
                 </Modal.Body>

@@ -5,7 +5,7 @@ export default function NavBar() {
     return (
         <header>
         <nav className="nav-bar">
-        <Link to="/" class="icon"><img src="img/mango-icon.png" alt="mango icon"/></Link>
+        <Link to="/" className="icon"><img src="img/mango-icon.png" alt="mango icon"/></Link>
             <div className="hamburger-menu"><a href="#"><i className="fa fa-bars" aria-label="menu"></i></a></div>
             <div className="nav-links">
                 <ul className="nav-options">
