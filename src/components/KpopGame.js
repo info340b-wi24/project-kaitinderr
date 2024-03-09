@@ -1,24 +1,44 @@
-import React, { useState } from 'react';
-// Assuming your song data is imported or fetched here
+import React, { useState, useEffect } from 'react';
 
 function getRandomIndex(data) {
   return Math.floor(Math.random() * data.length);
 }
 
 function KpopGame(props) {
-  const [currentSongIndex, setCurrentSongIndex] = useState(getRandomIndex(props.songs)); // To cycle through songs for the game
-  const [hintIndex, setHintIndex] = useState(0); // To show hints progressively
+  const maxGuesses = 5;
+  const [currentSongIndex, setCurrentSongIndex] = useState(getRandomIndex(props.songs));
+  const [hintIndex, setHintIndex] = useState(0);
   const [userGuess, setUserGuess] = useState('');
-  const [reveal, setReveal] = useState(false); // Reveal the answer
+  const [reveal, setReveal] = useState(false);
   const [correctGuess, setCorrectGuess] = useState(false);
+  const [startTime, setStartTime] = useState(Date.now());
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [guessesLeft, setGuessesLeft] = useState(maxGuesses);
 
-  const hints = [
-    `The artist of the song is "${props.songs[currentSongIndex].artist}"`,
-    `The album name of this song is "${props.songs[currentSongIndex].albumName}"`,
-    `The length (duration) of the song is "${props.songs[currentSongIndex].length}"`,
-    `The song was released on "${props.songs[currentSongIndex].releaseDate}"`,
-    `The songwriters are "${props.songs[currentSongIndex].songWriters}"`,
-  ];
+  useEffect(() => {
+    if (!reveal) {
+      const timer = setInterval(() => {
+        setElapsedTime(Date.now() - startTime);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [reveal, startTime]);
+
+  const getRank = () => {
+    switch (hintIndex) {
+      case 0:
+        return 'S';
+      case 1:
+        return 'A';
+      case 2:
+        return 'B';
+      case 3:
+        return 'C';
+      default:
+        return 'F';
+    }
+  };
 
   const resetGame = () => {
     setCurrentSongIndex(getRandomIndex(props.songs));
@@ -26,12 +46,9 @@ function KpopGame(props) {
     setHintIndex(0);
     setUserGuess('');
     setCorrectGuess(false);
-  };
-
-  const renderHints = () => {
-    return hints.slice(0, hintIndex + 1).map((hint, index) => (
-      <li key={index} className="list-group-item">{hint}</li>
-    ));
+    setStartTime(Date.now());
+    setElapsedTime(0);
+    setGuessesLeft(maxGuesses);
   };
 
   const handleGuess = (e) => {
@@ -39,17 +56,51 @@ function KpopGame(props) {
   };
 
   const checkGuess = () => {
+    const newGuessesLeft = guessesLeft - 1;
+    setGuessesLeft(newGuessesLeft);
+
     if (userGuess.toLowerCase() === props.songs[currentSongIndex].songName.toLowerCase()) {
-      setCorrectGuess(true); // Indicate the guess was correct
-      setReveal(true); // Reveal the answer immediately
+      setCorrectGuess(true);
+      setReveal(true);
     } else {
-      if (hintIndex >= 4) {
+      if (newGuessesLeft <= 0) {
         setReveal(true);
       } else {
         setHintIndex(hintIndex + 1);
       }
     }
-    setUserGuess(''); // Clear input field
+    setUserGuess('');
+  };
+
+  const renderHints = () => {
+    const hints = [
+      `The artist of the song is "${props.songs[currentSongIndex].artist}"`,
+      `The album name of this song is "${props.songs[currentSongIndex].albumName}"`,
+      `The length (duration) of the song is "${props.songs[currentSongIndex].length}"`,
+      `The song was released on "${props.songs[currentSongIndex].releaseDate}"`,
+      `The songwriters are "${props.songs[currentSongIndex].songWriters}"`,
+    ];
+
+    return hints.slice(0, hintIndex + 1).map((hint, index) => (
+      <li key={index} className="list-group-item">{hint}</li>
+    ));
+  };
+
+  const renderAnswerCard = () => {
+    const timeTaken = (elapsedTime / 1000).toFixed(2);
+    const rank = getRank();
+    const guessesUsed = maxGuesses - guessesLeft;
+    const songName = props.songs[currentSongIndex].songName;
+    const artist = props.songs[currentSongIndex].artist;
+
+    return (
+      <div>
+        <h5>The name of the song is "{songName}" by {artist}</h5>
+        <p>Rank: {rank}</p>
+        <p>Time taken: {timeTaken} seconds</p>
+        <p>Guesses used: {guessesUsed}</p>
+      </div>
+    );
   };
 
   return (
@@ -73,14 +124,12 @@ function KpopGame(props) {
           <div className="col-lg-6">
             <div className="card">
               <div className="card-header">
-                <h2>Clues</h2>
+                <h2>{reveal ? "Answer" : "Clues"}</h2>
               </div>
-              <ul className="list-group list-group-flush">
-                {renderHints()}
-                {reveal && !correctGuess && (
-                  <li className="list-group-item list-group-item-danger">The correct answer was: "{props.songs[currentSongIndex].songName}" by {props.songs[currentSongIndex].artist}</li>
-                )}
-              </ul>
+              <div className="card-body">
+                {reveal ? renderAnswerCard() : <ul className="list-group list-group-flush">{renderHints()}</ul>}
+                {!reveal && <p className="text-center mt-3">Guesses left: {guessesLeft}</p>}
+              </div>
             </div>
             {!reveal && (
               <div className="input-group mt-5 mb-3">
@@ -88,7 +137,6 @@ function KpopGame(props) {
                 <button className="btn btn-primary" onClick={checkGuess}>Submit Guess</button>
               </div>
             )}
-            {reveal && correctGuess && <div className="feedback-message mt-3">Correct! The song was: "{props.songs[currentSongIndex].songName}" by {props.songs[currentSongIndex].artist}</div>}
             <button className="btn btn-secondary mt-3" onClick={resetGame}>New Game</button>
           </div>
         </div>
@@ -98,5 +146,3 @@ function KpopGame(props) {
 }
 
 export default KpopGame;
-
-
