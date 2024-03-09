@@ -1,7 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SongForm from './SongForm.js';
+import { getDatabase, ref, onValue, set as firebaseSet } from 'firebase/database';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function SongCard(props) {
+    const [selectedScore, setSelectedScore] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
+
+    const dismissAlert = () => {
+        setShowAlert(false);
+    }
+
+    const handleScoreChange = (event) => {
+        setSelectedScore(event.target.value);
+    };
+
+    const handleSubmitScore = () => {
+        console.log(238523421)
+        console.log(props.songKey)
+        if (props.currentUser.userId === null) {
+            setShowAlert(true);
+            return;
+        } else if (!selectedScore) {
+            return;
+        }
+
+        const db = getDatabase();
+        const userRatingRef = ref(db, `ratings/${props.songKey}/${props.currentUser.userId}`);
+
+        firebaseSet(userRatingRef, {
+            score: selectedScore
+        });
+    };
 
     return (
         <div className="d-flex col-md-6 col-xl-3">
@@ -11,8 +42,8 @@ function SongCard(props) {
                         <h2 className="card-title mb-2"><a href="#" className="text-decoration-none text-reset">{props.song.songName}</a></h2>
                         <div className="row">
                             <div className="col-sm-6">
-                                <img src={props.song.albumCover} className="card-img album-cover mb-3" alt={props.song.songName} />
-                                <select className="mb-3 mx-1" aria-label='select score'>
+                                <img src={props.song.albumCoverURL} className="card-img album-cover mb-3" alt={props.song.songName} />
+                                <select className="mb-3 mx-1" aria-label='select score' value={selectedScore} onChange={handleScoreChange}>
                                     <option value="">Select Score</option>
                                     <option value="5">5</option>
                                     <option value="4">4</option>
@@ -20,7 +51,20 @@ function SongCard(props) {
                                     <option value="2">2</option>
                                     <option value="1">1</option>
                                 </select>
-                                <button type="submit" className="rank-button">Submit</button>
+                                <button type="button" className="rank-button" onClick={handleSubmitScore}>Submit</button>
+                                <Modal show={showAlert} onHide={dismissAlert}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Sign In Required</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        You need to be signed in to use this feature.
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={dismissAlert}>
+                                            Close
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
                             </div>
                             <div className="col-sm-6">
                                 <div className="ranking-card-content">
@@ -46,6 +90,65 @@ function SongCard(props) {
 export default function SongList(props) {
     const [searchQuery, setSearchQuery] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [songs, setSongs] = useState({});
+    const [ratings, setRatings] = useState({});
+    const [songData, setSongData] = useState([]);
+
+
+    const db = getDatabase();
+    const songsRef = ref(db, "songs");
+    const ratingsRef = ref(db, "ratings");
+
+    useEffect(() => {
+        const songOffFunction = onValue(songsRef, (snapshot) => {
+            const songsObj = snapshot.val();
+            setSongs(songsObj);
+        });
+
+        return () => songOffFunction();
+    }, []);
+
+    useEffect(() => {
+        const ratingsOffFunction = onValue(ratingsRef, (snapshot) => {
+            const ratingsObj = snapshot.val();
+            console.log(ratingsObj)
+            setRatings(ratingsObj);
+        });
+
+        return () => ratingsOffFunction();
+    }, []);
+
+    useEffect(() => {
+        const combinedData = Object.keys(songs).map(key => {
+            const song = songs[key];
+
+            console.log(1);
+            console.log(song)
+            console.log(ratings)
+            const songRatings = ratings[key] || {};
+            console.log(2);
+            const ratingsArray = Object.values(songRatings);
+            console.log(3);
+            const totalScore = ratingsArray.reduce((acc, curr) => acc + parseInt(curr.score || 0, 10), 0);
+            console.log(4);
+            const numRankings = ratingsArray.length;
+            console.log(5);
+            const averageScore = numRankings > 0 ? (totalScore / numRankings).toFixed(2) : 'No ratings';
+            console.log(6);
+
+            return {
+                ...song,
+                key,
+                totalScore,
+                numRankings,
+                averageScore,
+            };
+        });
+
+        setSongData(combinedData);
+    }, [songs, ratings]);
+
+    console.log(songData)
 
     const openModal = () => {
         setShowModal(true);
@@ -63,21 +166,21 @@ export default function SongList(props) {
         event.preventDefault();
     };
 
-    const sortedSongs = props.songs.map(song => ({
+    const sortedSongs = songData.map(song => ({
         ...song,
         score: song.totalScore / song.numRankings
     })).sort((a, b) => b.score - a.score);
 
-    let counter = 0;
-    const sortedSongCards = sortedSongs.map(song => {
-        counter++;
-        return <SongCard song={song} key={song.songName} position={counter} />
-    })
-
     // Function to filter the song cards based on search query
-    const filteredSongCards = sortedSongCards.filter(songCard => {
-        return songCard.key.toLowerCase().includes(searchQuery.toLowerCase());
+    const filteredSongs = sortedSongs.filter(song => {
+        return song.songName.toLowerCase().includes(searchQuery.toLowerCase());
     });
+
+    let counter = 0;
+    const displayedSongCards = filteredSongs.map(song => {
+        counter++;
+        return <SongCard song={song} key={song.key} currentUser={props.currentUser} songKey={song.key} songName={song.songName} />
+    })
 
     return (
         <main className="mx-auto text-center">
@@ -92,7 +195,7 @@ export default function SongList(props) {
                         <input type="text" placeholder="Search Song..." className="search" value={searchQuery} onChange={handleSearchInputChange} />
                     </form>
                     <div className="row">
-                        {filteredSongCards}
+                        {displayedSongCards}
                     </div>
                 </div>
             </div>

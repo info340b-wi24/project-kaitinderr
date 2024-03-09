@@ -21,7 +21,7 @@ function App(props) {
     <div className="App">
       <NavBar />
       <Routes>
-          <Route index element={<SongList songs={props.songData} />} />
+          <Route index element={<SongList songs={props.songData} currentUser={currentUser}/>} />
           <Route path="/game" element={<KpopGame songs={props.songData} />} />
           <Route path="/signin" element={<SignInPage users={props.userData} currentUser={currentUser} loginCallback={loginUser}/>} />
         </Routes>

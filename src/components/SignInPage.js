@@ -23,7 +23,7 @@ function SignInPage(props) {
     }
 
     const userCards = props.users.map(user => {
-        return <UserCard user={user} loginCallback={handleClick} />
+        return <UserCard user={user} loginCallback={handleClick} key={user.userId}/>
     })
 
     return (
