@@ -25,7 +25,7 @@ function App(props) {
           <Route path="/game" element={<KpopGame songs={props.songData} />} />
           <Route path="/signin" element={<SignInPage users={props.userData} currentUser={currentUser} loginCallback={loginUser}/>} />
         </Routes>
-      {/* <SongPage song={props.songData[2]} /> */}
+      {/* <SongPage song={props.songData} /> */}
       <Footer />
     </div>
   );
