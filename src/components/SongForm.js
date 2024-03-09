@@ -16,9 +16,7 @@ function SongForm({ showModal, handleClose }) {
         songWriters: '',
         lyrics: '',
         releaseDate: '',
-        length: '',
-        albumCoverURL: '', // WIP
-        backgroundBannerURL: '', // WIP
+        length: ''
     });
 
     const handleChange = (event) => {
@@ -59,18 +57,19 @@ function SongForm({ showModal, handleClose }) {
         await uploadBytes(bannerRef, bannerFile);
         const albumCoverUrlString = await getDownloadURL(albumCoverRef);
         const bannerUrlString = await getDownloadURL(bannerRef);
-        setSongData({
+
+        const song = {
             ...songData,
             albumCoverURL: albumCoverUrlString,
             backgroundBannerURL: bannerUrlString
-        });
+        }
         console.log(songData);
         console.log(albumCoverUrlString);
         console.log(bannerUrlString);
 
         const db = getDatabase();
         const songsRef = dbRef(db, 'songs');
-        firebasePush(songsRef, songData).then(() => {
+        firebasePush(songsRef, song).then(() => {
             setAlertMessage('Song added successfully!');
             setTimeout(() => {
                 handleClose();
