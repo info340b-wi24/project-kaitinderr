@@ -1,12 +1,12 @@
 [
-    {"userId": "tim", "userName": "Tim"},
-    {"userId": "shangzhen", "userName": "Shangzhen"},
-    {"userId": "kai", "userName": "Kai"},
-    {"userId": "cam", "userName": "Cam"},
-    {"userId": "bill", "userName": "Bill"},
-    {"userId": "park", "userName": "Park"},
-    {"userId": "tinder", "userName": "Tinder"},
-    {"userId": "bun", "userName": "Bun"},
-    {"userId": "student", "userName": "INFO 340 Student"},
-    {"userId": null, "userName": "Log Out"}
-  ]
+  {"userId": null, "userName": "Log Out"},
+  {"userId": "shangzhen", "userName": "Shangzhen"},
+  {"userId": "kai", "userName": "Kai"},
+  {"userId": "cam", "userName": "Cam"},
+  {"userId": "bill", "userName": "Bill"},
+  {"userId": "park", "userName": "Park"},
+  {"userId": "tinder", "userName": "Tinder"},
+  {"userId": "bun", "userName": "Bun"},
+  {"userId": "student", "userName": "INFO 340 Student"},
+  {"userId": "tim", "userName": "Tim"}
+]

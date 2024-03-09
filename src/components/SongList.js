@@ -17,8 +17,6 @@ function SongCard(props) {
     };
 
     const handleSubmitScore = () => {
-        console.log(238523421)
-        console.log(props.songKey)
         if (props.currentUser.userId === null) {
             setShowAlert(true);
             return;
@@ -111,7 +109,6 @@ export default function SongList(props) {
     useEffect(() => {
         const ratingsOffFunction = onValue(ratingsRef, (snapshot) => {
             const ratingsObj = snapshot.val();
-            console.log(ratingsObj)
             setRatings(ratingsObj);
         });
 
@@ -121,20 +118,11 @@ export default function SongList(props) {
     useEffect(() => {
         const combinedData = Object.keys(songs).map(key => {
             const song = songs[key];
-
-            console.log(1);
-            console.log(song)
-            console.log(ratings)
             const songRatings = ratings[key] || {};
-            console.log(2);
             const ratingsArray = Object.values(songRatings);
-            console.log(3);
             const totalScore = ratingsArray.reduce((acc, curr) => acc + parseInt(curr.score || 0, 10), 0);
-            console.log(4);
             const numRankings = ratingsArray.length;
-            console.log(5);
             const averageScore = numRankings > 0 ? (totalScore / numRankings).toFixed(2) : 'No ratings';
-            console.log(6);
 
             return {
                 ...song,
@@ -147,8 +135,6 @@ export default function SongList(props) {
 
         setSongData(combinedData);
     }, [songs, ratings]);
-
-    console.log(songData)
 
     const openModal = () => {
         setShowModal(true);
@@ -179,7 +165,7 @@ export default function SongList(props) {
     let counter = 0;
     const displayedSongCards = filteredSongs.map(song => {
         counter++;
-        return <SongCard song={song} key={song.key} currentUser={props.currentUser} songKey={song.key} songName={song.songName} />
+        return <SongCard song={song} key={song.key} position={counter} currentUser={props.currentUser} songKey={song.key} />
     })
 
     return (
