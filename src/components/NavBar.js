@@ -8,11 +8,10 @@ export default function NavBar() {
       <nav className="nav-bar">
         <Link to="/" className="icon"><img src="img/mango-icon.png" alt="mango icon" /></Link>
         
-        {/* Dropdown for mobile view */}
         <div className="mobile-nav">
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic" aria-label="Navigation Menu">
-              <i className="fa fa-bars"></i> {/* Ensure you have font-awesome or similar for the icon */}
+              <i className="fa fa-bars"></i>
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
@@ -29,7 +28,6 @@ export default function NavBar() {
           </Dropdown>
         </div>
         
-        {/* Regular navigation for desktop view */}
         <div className="desktop-nav">
           <Link to="/">Home</Link>
           <Link to="/game">Game</Link>
