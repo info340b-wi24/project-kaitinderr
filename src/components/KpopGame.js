@@ -13,7 +13,6 @@ function KpopGame() {
   const [hintIndex, setHintIndex] = useState(0);
   const [userGuess, setUserGuess] = useState('');
   const [reveal, setReveal] = useState(false);
-  // const [correctGuess, setCorrectGuess] = useState(false);
   const [startTime, setStartTime] = useState(Date.now());
   const [elapsedTime, setElapsedTime] = useState(0);
   const [guessesLeft, setGuessesLeft] = useState(5);
@@ -78,7 +77,6 @@ function KpopGame() {
     setHintIndex(0);
     setUserGuess('');
     setReveal(false);
-    // setCorrectGuess(false);
     setStartTime(Date.now());
     setElapsedTime(0);
     setGuessesLeft(maxGuesses);
@@ -92,7 +90,6 @@ function KpopGame() {
     setGuessesLeft(prevGuesses => {
       const newGuessesLeft = prevGuesses - 1;
       if (userGuess.toLowerCase() === songData[currentSongIndex]?.songName.toLowerCase()) {
-        // setCorrectGuess(true);
         setReveal(true);
       } else if (newGuessesLeft <= 0) {
         setReveal(true);
