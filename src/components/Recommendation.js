@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 
-function Recommendation() {
+function Recommendation({ songKey }) {
     const [selectedSongName, setSelectedSongName] = useState('');
     const [songs, setSongs] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
@@ -11,7 +11,7 @@ function Recommendation() {
     useEffect(() => {
         const db = getDatabase();
         const songsRef = ref(db, 'songs');
-        const recommendationsRef = ref(db, 'recommendations');
+        const recommendationsRef = ref(db, `recommendations/${songKey}`);
 
         const offSongs = onValue(songsRef, (snapshot) => {
             const songsVal = snapshot.val();
@@ -41,7 +41,7 @@ function Recommendation() {
             offSongs();
             offRecommendations();
         };
-    }, []);
+    }, [songKey]);
 
 
     const handleSongChange = (event) => {
@@ -58,7 +58,7 @@ function Recommendation() {
         const selectedSong = songs.find(song => song.songName === selectedSongName);
         if (selectedSong) {
             const db = getDatabase();
-            const recommendationsRef = ref(db, 'recommendations');
+            const recommendationsRef = ref(db, `recommendations/${songKey}`);
             const recommendationData = {
                 text: `[${selectedSong.songName}] ${newRecommendation}`,
                 album: selectedSong.albumName,
@@ -78,7 +78,7 @@ function Recommendation() {
         }
     };
 
-    const songOptions = songs.map(song => (
+    const songOptions = songs.filter(song => song.key !== songKey) .map(song => (
         <option key={song.key} value={song.songName}>{song.songName}</option>
     ));
 
