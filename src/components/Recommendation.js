@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDatabase, ref, onValue } from 'firebase/database';
+import { getDatabase, ref, onValue, push } from 'firebase/database';
 
 function Recommendation() {
     const [selectedSongName, setSelectedSongName] = useState('');
@@ -11,7 +11,9 @@ function Recommendation() {
     useEffect(() => {
         const db = getDatabase();
         const songsRef = ref(db, 'songs');
-        const offFunction = onValue(songsRef, (snapshot) => {
+        const recommendationsRef = ref(db, 'recommendations');
+
+        const offSongs = onValue(songsRef, (snapshot) => {
             const songsVal = snapshot.val();
             const loadedSongs = [];
             for (let key in songsVal) {
@@ -23,8 +25,24 @@ function Recommendation() {
             setSongs(loadedSongs);
         });
 
-        return () => offFunction();
+        const offRecommendations = onValue(recommendationsRef, (snapshot) => {
+            const recommendationsVal = snapshot.val();
+            const loadedRecommendations = [];
+            for (let key in recommendationsVal) {
+                loadedRecommendations.push({
+                    ...recommendationsVal[key],
+                    key: key
+                });
+            }
+            setRecommendations(loadedRecommendations);
+        });
+
+        return () => {
+            offSongs();
+            offRecommendations();
+        };
     }, []);
+
 
     const handleSongChange = (event) => {
         setSelectedSongName(event.target.value);
@@ -39,16 +57,22 @@ function Recommendation() {
         event.preventDefault();
         const selectedSong = songs.find(song => song.songName === selectedSongName);
         if (selectedSong) {
-            const recommendationText = `[${selectedSong.songName}] ${newRecommendation}`;
-            setRecommendations(prevRecommendations => [
-                ...prevRecommendations,
-                {
-                    text: recommendationText,
-                    album: selectedSong.albumName,
-                    cover: selectedSong.albumCoverURL
-                }
-            ]);
-            setNewRecommendation('');
+            const db = getDatabase();
+            const recommendationsRef = ref(db, 'recommendations');
+            const recommendationData = {
+                text: `[${selectedSong.songName}] ${newRecommendation}`,
+                album: selectedSong.albumName,
+                cover: selectedSong.albumCoverURL
+            };
+
+            push(recommendationsRef, recommendationData)
+                .then(() => {
+                    setNewRecommendation('');
+                    setErrorMessage('');
+                })
+                .catch((error) => {
+                    setErrorMessage("Failed to upload recommendation: " + error.message);
+                });
         } else {
             setErrorMessage("No song selected.");
         }
@@ -73,8 +97,8 @@ function Recommendation() {
         <div className="col-md-12 col-lg-4 py-2 px-lg-4">
             <div className="recommendations">
                 <h3 className="recommendations_title">Recommendations</h3>
-                {recommendationList}
             </div>
+            {recommendationList}
             <div className="recommendation_form">
                 <h4>Enter your recommendation:</h4>
                 <form onSubmit={handleSubmit} className="form">
