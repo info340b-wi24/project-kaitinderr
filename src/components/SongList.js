@@ -30,7 +30,7 @@ function SongCard(props) {
 
         firebaseSet(userRatingRef, {
             score: selectedScore
-        });
+        }).catch(err => console.log(err));
     };
 
     return (
