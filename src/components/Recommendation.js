@@ -21,8 +21,6 @@ function Recommendation() {
                 });
             }
             setSongs(loadedSongs);
-        }, {
-            onlyOnce: true
         });
 
         return () => offFunction();

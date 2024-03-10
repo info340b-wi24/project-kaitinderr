@@ -5,22 +5,48 @@ import { useParams } from 'react-router-dom';
 
 function SongPage() {
     const [song, setSong] = useState({});
+    const [ratings, setRatings] = useState({});
     const { songKey } = useParams();
 
-    useEffect(() => {
-        const db = getDatabase();
+    const db = getDatabase();
         const songRef = ref(db, `songs/${songKey}`);
-        const offFunction = onValue(songRef, (snapshot) => {
-            const data = snapshot.val();
-            setSong(data);
-        }, (error) => {
-            console.error(error);
-        });
+        const ratingsRef = ref(db, `ratings/${songKey}`);
 
-        return () => offFunction();
-    }, [songKey]);
+        useEffect(() => {
+            const offFunctionSong = onValue(songRef, (snapshot) => {
+                const data = snapshot.val();
+                setSong(data);
+            });
+            return () => {
+                offFunctionSong();
+            };
+        }, [songKey]);
 
-    if (Object.keys(song).length === 0) return <div>Loading...</div>;
+        useEffect(() => {
+            const offFunctionRatings = onValue(ratingsRef, (snapshot) => {
+                const ratingsObj = snapshot.val();
+                let totalScore = 0;
+                let numRankings = 0;
+        
+                if (ratingsObj) {
+                    numRankings = Object.keys(ratingsObj).length;
+                    totalScore = Object.values(ratingsObj).reduce((acc, rating) => {
+                        return acc + (Number(rating.score) || 0);
+                    }, 0);
+                }
+        
+                setRatings({
+                    totalScore: totalScore,
+                    numRankings: numRankings,
+                    averageScore: numRankings > 0 ? (totalScore / numRankings).toFixed(2) : 'No ratings'
+                });
+            });
+        
+            return () => offFunctionRatings();
+        }, [songKey, ratingsRef]);
+
+    if (!song) return <div>Loading...</div>;
+
 
     return (
         <main>
@@ -37,9 +63,9 @@ function SongPage() {
                                     <div className="row mb-3">
                                         <div className="col">
                                             <div className="ranks d-flex">
-                                                <p className="rank_text mr-2">Rank: {song.rank}</p>
+                                                <p className="rank_text mr-2">Score: {ratings.averageScore}</p>
                                                 <p className="rank_text mr-2">|</p>
-                                                <p className="rank_text">Score: {(song.totalScore / song.numRankings).toFixed(2)}</p>
+                                                <p className="rank_text">Ratings: {ratings.numRankings}</p>
                                             </div>
                                         </div>
                                     </div>
