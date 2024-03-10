@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import KpopGame from './components/KpopGame.js';
 import SongList from './components/SongList.js';
 import SongPage from './components/SongPage.js';
