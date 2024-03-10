@@ -247,6 +247,10 @@ nav {
     align-items: center;
     min-height: 100vh;
 }
+.lyrics {
+    text-align: left;
+    line-height: 3rem;
+}
 
 
 /* Mobile view */
