@@ -12,7 +12,7 @@ export default function NavBar() {
         <div className="mobile-nav">
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
-              <i className="fa fa-bars"></i> {/* Ensure you have font-awesome or similar for the icon */}
+              <i className="fa fa-bars"></i>
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
