@@ -6,7 +6,7 @@ export default function NavBar() {
   return (
     <header>
       <nav className="nav-bar">
-        <Link to="/" className="icon"><img src="img/mango-icon.png" alt="mango icon" /></Link>
+        <Link to="/" className="icon"><img src="https://firebasestorage.googleapis.com/v0/b/mangomusic-64e1e.appspot.com/o/icon%2Fmango-icon.png?alt=media&token=1ecb68e5-2143-4353-be8c-4591b4d45cab" alt="mango icon" /></Link>
         
         <div className="mobile-nav">
           <Dropdown>
