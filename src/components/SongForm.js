@@ -63,9 +63,6 @@ function SongForm({ showModal, handleClose }) {
             albumCoverURL: albumCoverUrlString,
             backgroundBannerURL: bannerUrlString
         }
-        console.log(songData);
-        console.log(albumCoverUrlString);
-        console.log(bannerUrlString);
 
         const db = getDatabase();
         const songsRef = dbRef(db, 'songs');
