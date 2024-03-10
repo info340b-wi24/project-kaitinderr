@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
+import { Link } from 'react-router-dom';
+
 
 function getRandomIndex(data) {
   return Math.floor(Math.random() * data.length);
@@ -54,6 +56,21 @@ function KpopGame() {
     }
   }, [reveal, startTime]);
 
+  const getRank = () => {
+    switch (hintIndex) {
+      case 0:
+        return 'S';
+      case 1:
+        return 'A';
+      case 2:
+        return 'B';
+      case 3:
+        return 'C';
+      default:
+        return 'F';
+    }
+  };
+
   const resetGame = () => {
     if (songData.length > 0) {
       setCurrentSongIndex(getRandomIndex(songData));
@@ -90,7 +107,7 @@ function KpopGame() {
   if (currentSongIndex === null || songData.length === 0) return <div>Loading...</div>;
 
   const song = songData[currentSongIndex];
-  
+
   const renderHints = () => {
     const hints = [
       `The artist of the song is "${song.artist}"`,
@@ -108,11 +125,13 @@ function KpopGame() {
   const renderAnswerCard = () => {
     const timeTaken = (elapsedTime / 1000).toFixed(2);
     const guessesUsed = maxGuesses - guessesLeft;
+    const rank = getRank();
     return (
       <div>
         <h5>The name of the song is "{song.songName}" by {song.artist}</h5>
         <p>Time taken: {timeTaken} seconds</p>
         <p>Guesses used: {guessesUsed}</p>
+        <p>Rank: {rank}</p>
       </div>
     );
   };
@@ -125,8 +144,10 @@ function KpopGame() {
             <div className="card-body">
               {reveal ? (
                 <>
-                  <h5 className="card-title">{song.songName}</h5>
-                  <img src={song.albumCoverURL} alt={`${song.artist} album cover`} className="img-fluid" />
+                  <Link to={`/songs/${song.key}`}>
+                    <h5 className="card-title">{song.songName}</h5>
+                    <img src={song.albumCoverURL} alt={`${song.artist} album cover`} className="img-fluid" />
+                  </Link>
                 </>
               ) : (
                 <img src="./img/question_mark.jpeg" alt="What's the song?" className="img-fluid" />
