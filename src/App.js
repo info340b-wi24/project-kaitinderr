@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import KpopGame from './components/KpopGame.js';
 import SongList from './components/SongList.js';
 import SongPage from './components/SongPage.js';
@@ -21,10 +21,11 @@ function App(props) {
     <div className="App">
       <NavBar />
       <Routes>
-          <Route index element={<SongList songs={props.songData} currentUser={currentUser}/>} />
+          <Route path="/" element={<SongList songs={props.songData} currentUser={currentUser}/>} />
           <Route path="/game" element={<KpopGame songs={props.songData} />} />
           <Route path="/signin" element={<SignInPage users={props.userData} currentUser={currentUser} loginCallback={loginUser}/>} />
           <Route path="/songs/:songKey" element={<SongPage songs={props.songData} />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       <Footer />
     </div>
