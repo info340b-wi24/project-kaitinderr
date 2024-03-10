@@ -47,6 +47,49 @@ nav {
     font-size: 2.5em;
 }
 
+.desktop-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: rgb(24, 24, 24);
+}
+
+.dropdown-toggle {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+.dropdown-menu a {
+    color: black;
+}
+
+.dropdown-item {
+    background-color: transparent;
+    border: none;
+}
+
+.hamburger-menu>a,
+.dropdown-toggle {
+    color: white;
+    font-size: 3rem;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.nav-links,
+.mobile-nav {
+    display: none;
+}
+
 /* ranking page css */
 .card-body {
     background-color: rgb(243, 244, 245);
@@ -74,42 +117,6 @@ nav {
     align-items: flex-start;
 }
 
-.category {
-    font-weight: bold;
-}
-
-.hamburger-menu>a,
-.dropdown-toggle {
-    color: white;
-    font-size: 3rem;
-    background-color: transparent;
-    border: none;
-    padding: 0;
-}
-
-.nav-links,
-.mobile-nav {
-    display: none;
-}
-
-.search {
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-.card-title {
-    color: black;
-    text-decoration: none;
-}
-
-.card-header {
-    background-color: black;
-    color: white;
-    border-radius: 5px 5px 0 0;
-    padding: 0.75rem 1.25rem;
-    text-align: center;
-}
-
 /* this button css is sourced from copy-paste-css.com*/
 .rank-button {
     display: inline-block;
@@ -127,29 +134,23 @@ nav {
     color: #0F1111;
 }
 
-.submit-guess {
+.search {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* game css */
+.card-title {
+    color: black;
+    text-decoration: none;
+}
+
+.card-header {
     background-color: black;
     color: white;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding: 0.5rem 1rem;
-    border: 2px solid black;
-    cursor: pointer;
-}
-
-.guess-input {
-    border: 2px solid black;
-    border-right: none;
-    padding: 0.5rem;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-.remaining-guesses {
+    border-radius: 5px 5px 0 0;
+    padding: 0.75rem 1.25rem;
     text-align: center;
-    margin-top: 1rem;
-    font-size: 1rem;
-    color: #333;
 }
 
 .input-group.justify-content-center {
@@ -162,6 +163,7 @@ nav {
     margin: 20px auto;
 }
 
+/* song page and recommendation css */
 .recommendations {
     border-radius: 5px;
     padding: 16px;
@@ -237,39 +239,6 @@ nav {
 
 .select_song {
     margin-bottom: 5px;
-}
-
-.mobile-nav {
-    display: none;
-}
-
-.desktop-nav {
-    display: flex;
-    justify-content: space-between;
-}
-
-.nav-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background-color: rgb(24, 24, 24);
-}
-
-.dropdown-toggle {
-    color: white;
-    background-color: transparent;
-    border: none;
-}
-
-.dropdown-menu a {
-    color: black;
-}
-
-.dropdown-item {
-    background-color: transparent;
-    border: none;
 }
 
 .main-container {
