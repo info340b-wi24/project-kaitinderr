@@ -97,7 +97,7 @@ function SongPage() {
                         </section>
                     </div>
                 </div>
-                <Recommendation song={song} />
+                <Recommendation songKey={songKey}/>
             </div>
         </main>
     );
