@@ -78,7 +78,7 @@ function Recommendation({ songKey }) {
         }
     };
 
-    const songOptions = songs.filter(song => song.key !== songKey) .map(song => (
+    const songOptions = songs.filter(song => song.key !== songKey).map(song => (
         <option key={song.key} value={song.songName}>{song.songName}</option>
     ));
 
@@ -97,28 +97,26 @@ function Recommendation({ songKey }) {
         <div className="col-md-12 col-lg-4 py-2 px-lg-4">
             <div className="recommendations">
                 <h3 className="recommendations_title">Recommendations</h3>
+                {recommendationList}
             </div>
-            {recommendationList}
             <div className="recommendation_form">
                 <h4>Enter your recommendation:</h4>
                 <form onSubmit={handleSubmit} className="form">
-                    <label htmlFor="select_song">Select a Song:
-                        <select className="select_song" value={selectedSongName} onChange={handleSongChange}>
-                            <option value=""></option>
-                            {songOptions}
-                        </select>
-                    </label>
+                    <label htmlFor="select_song">Select a Song:</label>
+                    <select id="select_song" className="select_song" value={selectedSongName} onChange={handleSongChange}>
+                        <option value=""></option>
+                        {songOptions}
+                    </select>
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <textarea
                         className="recommendation_text_area"
                         id="recommendation"
                         name="recommendation"
-                        required
                         placeholder="Type your recommendation here..."
                         value={newRecommendation}
                         onChange={handleInputChange}
                     ></textarea>
-                    <input className="button" type="submit" value="Submit" aria-label="Submit Recommendation" />
+                    <input className="button" type="submit" value="Submit Recommendation" aria-label="Submit Recommendation" />
                 </form>
             </div>
         </div>

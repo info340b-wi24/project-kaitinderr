@@ -11,7 +11,7 @@ export default function NavBar() {
         {/* Dropdown for mobile view */}
         <div className="mobile-nav">
           <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle variant="success" id="dropdown-basic" aria-label="Navigation Menu">
               <i className="fa fa-bars"></i> {/* Ensure you have font-awesome or similar for the icon */}
             </Dropdown.Toggle>
 
