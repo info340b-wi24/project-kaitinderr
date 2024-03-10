@@ -103,7 +103,7 @@ function Recommendation({ songKey }) {
                 <h4>Enter your recommendation:</h4>
                 <form onSubmit={handleSubmit} className="form">
                     <label htmlFor="select_song">Select a Song:</label>
-                    <select id="select_song" className="select_song" value={selectedSongName} onChange={handleSongChange}>
+                    <select className="select_song" value={selectedSongName} onChange={handleSongChange}>
                         <option value=""></option>
                         {songOptions}
                     </select>
